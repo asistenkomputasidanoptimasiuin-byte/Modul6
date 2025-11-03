@@ -1,0 +1,218 @@
+{
+    "raw_materials": [
+        {
+            "id": 1,
+            "name": "Pulp Kayu",
+            "stock": 12500,
+            "unit": "kg",
+            "min_stock": 5000,
+            "category": "bahan_baku_utama",
+            "supplier": "PT Supplier Kayu Indonesia",
+            "last_restock": "2024-01-15",
+            "lead_time": 7,
+            "price_per_unit": 8500
+        },
+        {
+            "id": 2,
+            "name": "Pulp Daur Ulang",
+            "stock": 7500,
+            "unit": "kg",
+            "min_stock": 3000,
+            "category": "bahan_baku_utama",
+            "supplier": "PT Daur Ulang Hijau",
+            "last_restock": "2024-01-18",
+            "lead_time": 5,
+            "price_per_unit": 6500
+        },
+        {
+            "id": 3,
+            "name": "Bahan Kimia Pemutih",
+            "stock": 1800,
+            "unit": "kg",
+            "min_stock": 1000,
+            "category": "bahan_kimia",
+            "supplier": "PT Kimia Bersih",
+            "last_restock": "2024-01-20",
+            "lead_time": 3,
+            "price_per_unit": 12000
+        },
+        {
+            "id": 4,
+            "name": "Bahan Pengisi (Filler)",
+            "stock": 3200,
+            "unit": "kg",
+            "min_stock": 1500,
+            "category": "bahan_kimia",
+            "supplier": "PT Mineral Indonesia",
+            "last_restock": "2024-01-22",
+            "lead_time": 4,
+            "price_per_unit": 8000
+        },
+        {
+            "id": 5,
+            "name": "Pewarna Kertas",
+            "stock": 450,
+            "unit": "kg",
+            "min_stock": 200,
+            "category": "bahan_kimia",
+            "supplier": "PT Colorchem Indo",
+            "last_restock": "2024-01-25",
+            "lead_time": 2,
+            "price_per_unit": 25000
+        }
+    ],
+    "finished_products": [
+        {
+            "id": 1,
+            "name": "Kertas HVS A4 70gr",
+            "stock": 44994,
+            "unit": "rim",
+            "min_stock": 10000,
+            "category": "kertas_tulis",
+            "price_per_unit": 45000,
+            "production_rate": 1200,
+            "raw_material_usage": [
+                {
+                    "material_id": 1,
+                    "quantity": 2.5
+                },
+                {
+                    "material_id": 3,
+                    "quantity": 0.3
+                },
+                {
+                    "material_id": 4,
+                    "quantity": 0.2
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Kertas HVS A4 80gr",
+            "stock": 28000,
+            "unit": "rim",
+            "min_stock": 8000,
+            "category": "kertas_tulis",
+            "price_per_unit": 52000,
+            "production_rate": 1000,
+            "raw_material_usage": [
+                {
+                    "material_id": 1,
+                    "quantity": 3.0
+                },
+                {
+                    "material_id": 3,
+                    "quantity": 0.4
+                },
+                {
+                    "material_id": 4,
+                    "quantity": 0.3
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Kertas Koran 45gr",
+            "stock": 35000,
+            "unit": "rim",
+            "min_stock": 12000,
+            "category": "kertas_koran",
+            "price_per_unit": 28000,
+            "production_rate": 1500,
+            "raw_material_usage": [
+                {
+                    "material_id": 2,
+                    "quantity": 2.0
+                },
+                {
+                    "material_id": 3,
+                    "quantity": 0.2
+                },
+                {
+                    "material_id": 4,
+                    "quantity": 0.1
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Kertas Kemasan Coklat",
+            "stock": 18000,
+            "unit": "rim",
+            "min_stock": 6000,
+            "category": "kertas_kemasan",
+            "price_per_unit": 38000,
+            "production_rate": 1100,
+            "raw_material_usage": [
+                {
+                    "material_id": 2,
+                    "quantity": 2.8
+                },
+                {
+                    "material_id": 5,
+                    "quantity": 0.1
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "name": "Kertas Art Paper 150gr",
+            "stock": 12000,
+            "unit": "rim",
+            "min_stock": 4000,
+            "category": "kertas_khusus",
+            "price_per_unit": 85000,
+            "production_rate": 800,
+            "raw_material_usage": [
+                {
+                    "material_id": 1,
+                    "quantity": 4.5
+                },
+                {
+                    "material_id": 3,
+                    "quantity": 0.5
+                },
+                {
+                    "material_id": 4,
+                    "quantity": 0.4
+                },
+                {
+                    "material_id": 5,
+                    "quantity": 0.05
+                }
+            ]
+        }
+    ],
+    "inventory_history": [
+        {
+            "id": 1,
+            "date": "2024-01-25",
+            "type": "material_in",
+            "item_id": 1,
+            "item_type": "raw_material",
+            "quantity": 5000,
+            "reference": "PO-2024-001",
+            "notes": "Restock rutin"
+        },
+        {
+            "id": 2,
+            "date": "2024-01-25",
+            "type": "material_out",
+            "item_id": 1,
+            "item_type": "raw_material",
+            "quantity": -2500,
+            "reference": "PROD-2024-0125",
+            "notes": "Produksi Kertas HVS A4"
+        },
+        {
+            "id": 3,
+            "date": "2024-01-24",
+            "type": "product_in",
+            "item_id": 1,
+            "item_type": "finished_product",
+            "quantity": 5000,
+            "reference": "PROD-2024-0124",
+            "notes": "Hasil produksi harian"
+        }
+    ]
+}

@@ -1,0 +1,132 @@
+{
+    "machines": [
+        {
+            "id": 1,
+            "name": "Paper Machine 1",
+            "type": "paper_machine",
+            "status": "running",
+            "planned_production_time": 480,
+            "downtime": 20,
+            "last_maintenance": "2024-01-20",
+            "next_maintenance": "2024-02-20",
+            "operating_hours": 12500,
+            "capacity": 1500,
+            "unit": "rim/hari",
+            "efficiency_target": 85,
+            "location": "Production Line A",
+            "specifications": {
+                "max_speed": "1200 m/min",
+                "width": "3.2 m",
+                "year_installed": 2020,
+                "manufacturer": "Voith Paper"
+            }
+        },
+        {
+            "id": 2,
+            "name": "Paper Machine 2",
+            "type": "paper_machine",
+            "status": "maintenance",
+            "planned_production_time": 480,
+            "downtime": 120,
+            "last_maintenance": "2024-01-25",
+            "next_maintenance": "2024-01-26",
+            "operating_hours": 9800,
+            "capacity": 1200,
+            "unit": "rim/hari",
+            "efficiency_target": 82,
+            "location": "Production Line B",
+            "specifications": {
+                "max_speed": "1000 m/min",
+                "width": "2.8 m",
+                "year_installed": 2018,
+                "manufacturer": "Andritz"
+            },
+            "maintenance_notes": "Penggantian wire section dan routine checkup"
+        },
+        {
+            "id": 3,
+            "name": "Coating Machine 1",
+            "type": "coating_machine",
+            "status": "stopped",
+            "planned_production_time": 480,
+            "downtime": 30,
+            "last_maintenance": "2024-01-22",
+            "next_maintenance": "2024-02-22",
+            "operating_hours": 8700,
+            "capacity": 1000,
+            "unit": "rim/hari",
+            "efficiency_target": 88,
+            "location": "Finishing Line A",
+            "specifications": {
+                "coating_type": "Blade Coater",
+                "max_speed": "800 m/min",
+                "year_installed": 2021,
+                "manufacturer": "BTG"
+            }
+        },
+        {
+            "id": 4,
+            "name": "Slitter Rewinder 1",
+            "type": "slitting_machine",
+            "status": "running",
+            "planned_production_time": 480,
+            "downtime": 20,
+            "last_maintenance": "2024-01-18",
+            "next_maintenance": "2024-02-18",
+            "operating_hours": 6500,
+            "capacity": 2000,
+            "unit": "rim/hari",
+            "efficiency_target": 90,
+            "location": "Finishing Line B",
+            "specifications": {
+                "max_width": "3.2 m",
+                "max_diameter": "1.5 m",
+                "year_installed": 2019,
+                "manufacturer": "Kampf"
+            }
+        },
+        {
+            "id": 5,
+            "name": "Pulp Preparation System",
+            "type": "pulp_system",
+            "status": "running",
+            "planned_production_time": 480,
+            "downtime": 15,
+            "last_maintenance": "2024-01-15",
+            "next_maintenance": "2024-02-15",
+            "operating_hours": 11200,
+            "capacity": 5000,
+            "unit": "kg/hari",
+            "efficiency_target": 85,
+            "location": "Raw Material Area",
+            "specifications": {
+                "capacity": "5 ton/hari",
+                "system_type": "Batch Pulping",
+                "year_installed": 2020,
+                "manufacturer": "Valmet"
+            }
+        }
+    ],
+    "machine_categories": [
+        {
+            "id": 1,
+            "name": "Paper Machine",
+            "description": "Mesin utama pembuatan kertas"
+        },
+        {
+            "id": 2,
+            "name": "Coating Machine",
+            "description": "Mesin pelapis permukaan kertas"
+        },
+        {
+            "id": 3,
+            "name": "Slitting Machine",
+            "description": "Mesin pemotong dan penggulung kertas"
+        },
+        {
+            "id": 4,
+            "name": "Pulp System",
+            "description": "Sistem persiapan pulp"
+        }
+    ]
+}

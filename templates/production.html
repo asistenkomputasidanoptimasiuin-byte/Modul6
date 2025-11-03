@@ -1,0 +1,283 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">Manajemen Produksi</h1>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Machine Status -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h5 class="card-title mb-0"><i class="fas fa-cogs me-2"></i>Status Mesin</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Mesin</th>
+                                <th>Status</th>
+                                <th>Waktu Produksi (menit)</th>
+                                <th>Downtime (menit)</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="machinesTable">
+                            {% for machine in machines %}
+                            <tr data-id="{{ machine.id }}">
+                                <td>{{ machine.name }}</td>
+                                <td>
+                                    <select class="form-select form-select-sm status-select">
+                                        <option value="running" {% if machine.status == 'running' %}selected{% endif %}>Berjalan</option>
+                                        <option value="maintenance" {% if machine.status == 'maintenance' %}selected{% endif %}>Maintenance</option>
+                                        <option value="stopped" {% if machine.status == 'stopped' %}selected{% endif %}>Berhenti</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control form-control-sm planned-time-input" 
+                                           value="{{ machine.planned_production_time }}" min="0">
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control form-control-sm downtime-input" 
+                                           value="{{ machine.downtime }}" min="0">
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary update-machine-btn">
+                                        <i class="fas fa-sync-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OEE Dashboard -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h5 class="card-title mb-0"><i class="fas fa-chart-bar me-2"></i>Dashboard OEE</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Mesin</th>
+                                <th>Availability</th>
+                                <th>Performance</th>
+                                <th>Quality</th>
+                                <th>OEE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for machine in machines %}
+                            <tr>
+                                <td>{{ machine.name }}</td>
+                                <td>{{ oee_data[machine.id].availability }}%</td>
+                                <td>{{ oee_data[machine.id].performance }}%</td>
+                                <td>{{ oee_data[machine.id].quality }}%</td>
+                                <td>
+                                    <span class="badge {% if oee_data[machine.id].oee >= 85 %}bg-success{% elif oee_data[machine.id].oee >= 70 %}bg-warning{% else %}bg-danger{% endif %}">
+                                        {{ oee_data[machine.id].oee }}%
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- OEE Explanation -->
+                <div class="mt-3">
+                    <h6>Penjelasan OEE:</h6>
+                    <ul class="small">
+                        <li><strong>Availability</strong>: Rasio waktu mesin tersedia untuk produksi</li>
+                        <li><strong>Performance</strong>: Kecepatan produksi aktual vs ideal</li>
+                        <li><strong>Quality</strong>: Rasio produk baik vs total produksi</li>
+                        <li><strong>OEE</strong>: Overall Equipment Effectiveness (Availability × Performance × Quality)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Production Record -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="card-title mb-0"><i class="fas fa-plus me-2"></i>Tambah Data Produksi</h5>
+            </div>
+            <div class="card-body">
+                <form id="productionForm">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="machineSelect" class="form-label">Mesin</label>
+                            <select class="form-select" id="machineSelect" required>
+                                <option value="">Pilih Mesin</option>
+                                {% for machine in machines %}
+                                <option value="{{ machine.id }}">{{ machine.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="productSelect" class="form-label">Produk</label>
+                            <select class="form-select" id="productSelect" required>
+                                <option value="">Pilih Produk</option>
+                                <option value="1">Kertas HVS A4</option>
+                                <option value="2">Kertas Koran</option>
+                                <option value="3">Kertas Kemasan</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="quantityInput" class="form-label">Jumlah (rim)</label>
+                            <input type="number" class="form-control" id="quantityInput" required min="1">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="defectsInput" class="form-label">Cacat (rim)</label>
+                            <input type="number" class="form-control" id="defectsInput" min="0" value="0">
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">&nbsp;</label>
+                            <button type="submit" class="btn btn-success w-100">
+                                <i class="fas fa-save me-2"></i>Simpan
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Production -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="card-title mb-0"><i class="fas fa-history me-2"></i>Produksi Terkini</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Tanggal</th>
+                                <th>Mesin</th>
+                                <th>Produk</th>
+                                <th>Jumlah</th>
+                                <th>Cacat</th>
+                                <th>Yield</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for record in production %}
+                            <tr>
+                                <td>{{ record.date }}</td>
+                                <td>Mesin {{ record.machine_id }}</td>
+                                <td>
+                                    {% if record.product_id == 1 %}Kertas HVS A4
+                                    {% elif record.product_id == 2 %}Kertas Koran
+                                    {% else %}Kertas Kemasan
+                                    {% endif %}
+                                </td>
+                                <td>{{ record.quantity }} rim</td>
+                                <td>{{ record.defects }} rim</td>
+                                <td>
+                                    {% set yield = ((record.quantity - record.defects) / record.quantity * 100) if record.quantity > 0 else 0 %}
+                                    <span class="badge {% if yield >= 95 %}bg-success{% elif yield >= 90 %}bg-warning{% else %}bg-danger{% endif %}">
+                                        {{ "%.1f"|format(yield) }}%
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Update machine status
+    document.querySelectorAll('.update-machine-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const id = parseInt(row.dataset.id);
+            
+            const updateData = {
+                machines: [{
+                    id: id,
+                    status: row.querySelector('.status-select').value,
+                    planned_production_time: parseInt(row.querySelector('.planned-time-input').value),
+                    downtime: parseInt(row.querySelector('.downtime-input').value)
+                }]
+            };
+            
+            fetch('/api/update_machine', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updateData)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.status === 'success') {
+                    alert('Status mesin berhasil diperbarui!');
+                    location.reload();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Terjadi kesalahan saat memperbarui status mesin.');
+            });
+        });
+    });
+
+    // Add production record
+    document.getElementById('productionForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = {
+            machine_id: parseInt(document.getElementById('machineSelect').value),
+            product_id: parseInt(document.getElementById('productSelect').value),
+            quantity: parseInt(document.getElementById('quantityInput').value),
+            defects: parseInt(document.getElementById('defectsInput').value)
+        };
+        
+        fetch('/api/add_production', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.status === 'success') {
+                alert('Data produksi berhasil ditambahkan!');
+                location.reload();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan saat menambahkan data produksi.');
+        });
+    });
+});
+</script>
+{% endblock %}

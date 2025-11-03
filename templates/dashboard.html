@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">Dashboard Manufaktur Kertas</h1>
+        
+        <!-- Alert Section -->
+        {% if alerts %}
+        <div class="alert alert-warning">
+            <h5><i class="fas fa-exclamation-triangle me-2"></i>Peringatan Stok Rendah</h5>
+            <ul class="mb-0">
+                {% for alert in alerts %}
+                <li>{{ alert }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row">
+    <!-- Inventory Summary -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="card-title mb-0"><i class="fas fa-boxes me-2"></i>Ringkasan Inventory</h5>
+            </div>
+            <div class="card-body">
+                <h6>Bahan Baku</h6>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Material</th>
+                                <th>Stok</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for material in inventory.raw_materials %}
+                            <tr>
+                                <td>{{ material.name }}</td>
+                                <td>{{ material.stock }} {{ material.unit }}</td>
+                                <td>
+                                    {% if material.stock < material.min_stock %}
+                                    <span class="badge bg-danger">Rendah</span>
+                                    {% else %}
+                                    <span class="badge bg-success">Aman</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h6 class="mt-3">Produk Jadi</h6>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Produk</th>
+                                <th>Stok</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product in inventory.finished_products %}
+                            <tr>
+                                <td>{{ product.name }}</td>
+                                <td>{{ product.stock }} {{ product.unit }}</td>
+                                <td>
+                                    {% if product.stock < product.min_stock %}
+                                    <span class="badge bg-danger">Rendah</span>
+                                    {% else %}
+                                    <span class="badge bg-success">Aman</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Machine Status -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h5 class="card-title mb-0"><i class="fas fa-cogs me-2"></i>Status Mesin</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Mesin</th>
+                                <th>Status</th>
+                                <th>OEE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for machine in machines %}
+                            <tr>
+                                <td>{{ machine.name }}</td>
+                                <td>
+                                    {% if machine.status == 'running' %}
+                                    <span class="badge bg-success">Berjalan</span>
+                                    {% elif machine.status == 'maintenance' %}
+                                    <span class="badge bg-warning">Maintenance</span>
+                                    {% else %}
+                                    <span class="badge bg-danger">Berhenti</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if oee_data[machine.id].oee >= 85 %}
+                                    <span class="badge bg-success">{{ oee_data[machine.id].oee }}%</span>
+                                    {% elif oee_data[machine.id].oee >= 70 %}
+                                    <span class="badge bg-warning">{{ oee_data[machine.id].oee }}%</span>
+                                    {% else %}
+                                    <span class="badge bg-danger">{{ oee_data[machine.id].oee }}%</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- OEE Summary -->
+                <h6 class="mt-3">Ringkasan OEE</h6>
+                <div class="row text-center">
+                    {% for machine in machines %}
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-body p-2">
+                                <small class="text-muted">{{ machine.name.split()[-1] }}</small>
+                                <div class="fw-bold {% if oee_data[machine.id].oee >= 85 %}text-success{% elif oee_data[machine.id].oee >= 70 %}text-warning{% else %}text-danger{% endif %}">
+                                    {{ oee_data[machine.id].oee }}%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="card-title mb-0"><i class="fas fa-bolt me-2"></i>Aksi Cepat</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-2">
+                        <a href="/inventory" class="btn btn-outline-primary w-100">
+                            <i class="fas fa-edit me-2"></i>Update Inventory
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="/production" class="btn btn-outline-info w-100">
+                            <i class="fas fa-plus me-2"></i>Tambah Produksi
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="/production" class="btn btn-outline-warning w-100">
+                            <i class="fas fa-tools me-2"></i>Update Status Mesin
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="/analysis" class="btn btn-outline-success w-100">
+                            <i class="fas fa-chart-line me-2"></i>Lihat Analisis
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

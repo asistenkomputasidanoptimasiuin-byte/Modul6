@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">Manajemen Inventory</h1>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Raw Materials -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="card-title mb-0"><i class="fas fa-tree me-2"></i>Bahan Baku</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Material</th>
+                                <th>Stok</th>
+                                <th>Min. Stok</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rawMaterialsTable">
+                            {% for material in inventory.raw_materials %}
+                            <tr data-id="{{ material.id }}">
+                                <td>{{ material.name }}</td>
+                                <td>
+                                    <input type="number" class="form-control form-control-sm stock-input" 
+                                           value="{{ material.stock }}" data-field="stock" min="0">
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control form-control-sm min-stock-input" 
+                                           value="{{ material.min_stock }}" data-field="min_stock" min="0">
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-success update-btn">
+                                        <i class="fas fa-save"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Finished Products -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h5 class="card-title mb-0"><i class="fas fa-box me-2"></i>Produk Jadi</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Produk</th>
+                                <th>Stok</th>
+                                <th>Min. Stok</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="finishedProductsTable">
+                            {% for product in inventory.finished_products %}
+                            <tr data-id="{{ product.id }}">
+                                <td>{{ product.name }}</td>
+                                <td>
+                                    <input type="number" class="form-control form-control-sm stock-input" 
+                                           value="{{ product.stock }}" data-field="stock" min="0">
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control form-control-sm min-stock-input" 
+                                           value="{{ product.min_stock }}" data-field="min_stock" min="0">
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-success update-btn">
+                                        <i class="fas fa-save"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Stock Alerts -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <h5 class="card-title mb-0"><i class="fas fa-exclamation-circle me-2"></i>Peringatan Stok Rendah</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Bahan Baku</h6>
+                        <ul class="list-group">
+                            {% for material in inventory.raw_materials %}
+                            {% if material.stock < material.min_stock %}
+                            <li class="list-group-item list-group-item-danger">
+                                {{ material.name }}: {{ material.stock }} {{ material.unit }} (Min: {{ material.min_stock }})
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Produk Jadi</h6>
+                        <ul class="list-group">
+                            {% for product in inventory.finished_products %}
+                            {% if product.stock < product.min_stock %}
+                            <li class="list-group-item list-group-item-danger">
+                                {{ product.name }}: {{ product.stock }} {{ product.unit }} (Min: {{ product.min_stock }})
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Update inventory data
+    document.querySelectorAll('.update-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const id = parseInt(row.dataset.id);
+            const isRawMaterial = row.closest('#rawMaterialsTable') !== null;
+            
+            const data = {
+                stock: parseInt(row.querySelector('.stock-input').value),
+                min_stock: parseInt(row.querySelector('.min-stock-input').value)
+            };
+            
+            const updateData = {
+                [isRawMaterial ? 'raw_materials' : 'finished_products']: [
+                    { id: id, ...data }
+                ]
+            };
+            
+            fetch('/api/update_inventory', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updateData)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.status === 'success') {
+                    alert('Data berhasil diperbarui!');
+                    location.reload();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Terjadi kesalahan saat memperbarui data.');
+            });
+        });
+    });
+});
+</script>
+{% endblock %}

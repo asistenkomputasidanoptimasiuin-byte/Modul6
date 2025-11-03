@@ -1,0 +1,196 @@
+{
+    "sales": [
+        {
+            "id": 1,
+            "date": "2023-01-15",
+            "product_id": 1,
+            "quantity": 11500,
+            "customer": "PT Distributor Utama",
+            "region": "Jawa Barat",
+            "sales_price": 43000,
+            "total_amount": 494500000,
+            "payment_status": "paid"
+        },
+        {
+            "id": 2,
+            "date": "2023-02-18",
+            "product_id": 1,
+            "quantity": 12000,
+            "customer": "PT Distributor Utama",
+            "region": "Jawa Barat",
+            "sales_price": 43500,
+            "total_amount": 522000000,
+            "payment_status": "paid"
+        },
+        {
+            "id": 3,
+            "date": "2023-03-22",
+            "product_id": 1,
+            "quantity": 12500,
+            "customer": "PT Distributor Utama",
+            "region": "Jawa Barat",
+            "sales_price": 43800,
+            "total_amount": 547500000,
+            "payment_status": "paid"
+        },
+        {
+            "id": 4,
+            "date": "2023-04-25",
+            "product_id": 1,
+            "quantity": 13000,
+            "customer": "PT Distributor Utama",
+            "region": "Jawa Barat",
+            "sales_price": 44000,
+            "total_amount": 572000000,
+            "payment_status": "paid"
+        },
+        {
+            "id": 5,
+            "date": "2023-05-28",
+            "product_id": 1,
+            "quantity": 13500,
+            "customer": "PT Distributor Utama",
+            "region": "Jawa Barat",
+            "sales_price": 44200,
+            "total_amount": 596700000,
+            "payment_status": "paid"
+        },
+        {
+            "id": 6,
+            "date": "2023-06-30",
+            "product_id": 1,
+            "quantity": 14000,
+            "customer": "PT Distributor Utama",
+            "region": "Jawa Barat",
+            "sales_price": 44500,
+            "total_amount": 623000000,
+            "payment_status": "paid"
+        },
+        {
+            "id": 7,
+            "date": "2023-07-30",
+            "product_id": 1,
+            "quantity": 14500,
+            "customer": "PT Distributor Utama",
+            "region": "Jawa Barat",
+            "sales_price": 44800,
+            "total_amount": 649600000,
+            "payment_status": "paid"
+        },
+        {
+            "id": 8,
+            "date": "2023-08-28",
+            "product_id": 1,
+            "quantity": 15000,
+            "customer": "PT Distributor Utama",
+            "region": "Jawa Barat",
+            "sales_price": 45000,
+            "total_amount": 675000000,
+            "payment_status": "paid"
+        },
+        {
+            "id": 9,
+            "date": "2023-09-25",
+            "product_id": 1,
+            "quantity": 15500,
+            "customer": "PT Distributor Utama",
+            "region": "Jawa Barat",
+            "sales_price": 45200,
+            "total_amount": 700600000,
+            "payment_status": "paid"
+        },
+        {
+            "id": 10,
+            "date": "2023-10-30",
+            "product_id": 1,
+            "quantity": 16000,
+            "customer": "PT Distributor Utama",
+            "region": "Jawa Barat",
+            "sales_price": 45500,
+            "total_amount": 728000000,
+            "payment_status": "paid"
+        },
+        {
+            "id": 11,
+            "date": "2023-11-27",
+            "product_id": 1,
+            "quantity": 16500,
+            "customer": "PT Distributor Utama",
+            "region": "Jawa Barat",
+            "sales_price": 45800,
+            "total_amount": 755700000,
+            "payment_status": "paid"
+        },
+        {
+            "id": 12,
+            "date": "2023-12-29",
+            "product_id": 1,
+            "quantity": 17000,
+            "customer": "PT Distributor Utama",
+            "region": "Jawa Barat",
+            "sales_price": 46000,
+            "total_amount": 782000000,
+            "payment_status": "paid"
+        },
+        {
+            "id": 13,
+            "date": "2024-01-20",
+            "product_id": 1,
+            "quantity": 17500,
+            "customer": "PT Distributor Utama",
+            "region": "Jawa Barat",
+            "sales_price": 46200,
+            "total_amount": 808500000,
+            "payment_status": "pending"
+        }
+    ],
+    "customers": [
+        {
+            "id": 1,
+            "name": "PT Distributor Utama",
+            "region": "Jawa Barat",
+            "category": "distributor",
+            "credit_limit": 1000000000,
+            "payment_terms": "net_30"
+        },
+        {
+            "id": 2,
+            "name": "CV Sumber Rejeki",
+            "region": "Jawa Tengah",
+            "category": "reseller",
+            "credit_limit": 500000000,
+            "payment_terms": "net_15"
+        },
+        {
+            "id": 3,
+            "name": "PT Percetakan Maju",
+            "region": "Jakarta",
+            "category": "end_user",
+            "credit_limit": 300000000,
+            "payment_terms": "net_15"
+        }
+    ],
+    "sales_forecast": [
+        {
+            "period": "2024-02",
+            "product_id": 1,
+            "forecast_quantity": 18000,
+            "confidence_level": 85,
+            "forecast_date": "2024-01-25"
+        },
+        {
+            "period": "2024-03",
+            "product_id": 1,
+            "forecast_quantity": 18500,
+            "confidence_level": 82,
+            "forecast_date": "2024-01-25"
+        },
+        {
+            "period": "2024-04",
+            "product_id": 1,
+            "forecast_quantity": 19000,
+            "confidence_level": 80,
+            "forecast_date": "2024-01-25"
+        }
+    ]
+}

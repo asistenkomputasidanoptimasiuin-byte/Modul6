@@ -1,0 +1,247 @@
+{
+    "daily_production": [
+        {
+            "id": 1,
+            "date": "2024-01-25",
+            "machine_id": 1,
+            "product_id": 1,
+            "quantity": 12500,
+            "defects": 125,
+            "shift": "shift_1",
+            "operator": "Budi Santoso",
+            "start_time": "08:00",
+            "end_time": "16:00",
+            "production_hours": 8,
+            "quality_grade": "A",
+            "notes": "Produksi normal, sedikit gangguan pada wire section"
+        },
+        {
+            "id": 2,
+            "date": "2024-01-25",
+            "machine_id": 1,
+            "product_id": 2,
+            "quantity": 8500,
+            "defects": 85,
+            "shift": "shift_2",
+            "operator": "Siti Rahayu",
+            "start_time": "16:00",
+            "end_time": "24:00",
+            "production_hours": 8,
+            "quality_grade": "A",
+            "notes": "Produksi stabil"
+        },
+        {
+            "id": 3,
+            "date": "2024-01-25",
+            "machine_id": 3,
+            "product_id": 5,
+            "quantity": 6500,
+            "defects": 195,
+            "shift": "shift_1",
+            "operator": "Ahmad Fauzi",
+            "start_time": "08:00",
+            "end_time": "16:00",
+            "production_hours": 8,
+            "quality_grade": "B",
+            "notes": "Masalah pada coating consistency"
+        },
+        {
+            "id": 4,
+            "date": "2024-01-24",
+            "machine_id": 1,
+            "product_id": 1,
+            "quantity": 11800,
+            "defects": 118,
+            "shift": "shift_1",
+            "operator": "Budi Santoso",
+            "start_time": "08:00",
+            "end_time": "16:00",
+            "production_hours": 8,
+            "quality_grade": "A",
+            "notes": "Produksi sesuai target"
+        },
+        {
+            "id": 5,
+            "date": "2024-01-24",
+            "machine_id": 2,
+            "product_id": 3,
+            "quantity": 9200,
+            "defects": 184,
+            "shift": "shift_1",
+            "operator": "Dewi Anggraini",
+            "start_time": "08:00",
+            "end_time": "16:00",
+            "production_hours": 8,
+            "quality_grade": "B",
+            "notes": "Minor adjustment pada forming fabric"
+        },
+        {
+            "id": 6,
+            "date": "2024-01-24",
+            "machine_id": 4,
+            "product_id": 4,
+            "quantity": 7800,
+            "defects": 78,
+            "shift": "shift_2",
+            "operator": "Rudi Hermawan",
+            "start_time": "16:00",
+            "end_time": "24:00",
+            "production_hours": 8,
+            "quality_grade": "A",
+            "notes": "Slitting precision excellent"
+        },
+        {
+            "id": 7,
+            "date": "2024-01-23",
+            "machine_id": 1,
+            "product_id": 1,
+            "quantity": 12200,
+            "defects": 122,
+            "shift": "shift_1",
+            "operator": "Budi Santoso",
+            "start_time": "08:00",
+            "end_time": "16:00",
+            "production_hours": 8,
+            "quality_grade": "A",
+            "notes": "Produksi optimal"
+        },
+        {
+            "id": 8,
+            "date": "2024-01-23",
+            "machine_id": 3,
+            "product_id": 5,
+            "quantity": 6800,
+            "defects": 204,
+            "shift": "shift_2",
+            "operator": "Ahmad Fauzi",
+            "start_time": "16:00",
+            "end_time": "24:00",
+            "production_hours": 8,
+            "quality_grade": "B",
+            "notes": "Coating viscosity adjustment needed"
+        },
+        {
+            "id": 9,
+            "date": "2024-01-22",
+            "machine_id": 1,
+            "product_id": 2,
+            "quantity": 8800,
+            "defects": 132,
+            "shift": "shift_1",
+            "operator": "Siti Rahayu",
+            "start_time": "08:00",
+            "end_time": "16:00",
+            "production_hours": 8,
+            "quality_grade": "A",
+            "notes": "Good run on heavier paper grade"
+        },
+        {
+            "id": 10,
+            "date": "2024-01-22",
+            "machine_id": 2,
+            "product_id": 3,
+            "quantity": 9500,
+            "defects": 190,
+            "shift": "shift_2",
+            "operator": "Dewi Anggraini",
+            "start_time": "16:00",
+            "end_time": "24:00",
+            "production_hours": 8,
+            "quality_grade": "B",
+            "notes": "Standard production run"
+        },
+        {
+            "date": "2025-11-03",
+            "machine_id": 4,
+            "product_id": 2,
+            "quantity": 2000,
+            "defects": 12
+        },
+        {
+            "date": "2025-11-03",
+            "machine_id": 2,
+            "product_id": 1,
+            "quantity": 10000,
+            "defects": 90
+        }
+    ],
+    "production_schedule": [
+        {
+            "id": 1,
+            "date": "2024-01-26",
+            "machine_id": 1,
+            "product_id": 1,
+            "planned_quantity": 12000,
+            "priority": "high",
+            "status": "scheduled"
+        },
+        {
+            "id": 2,
+            "date": "2024-01-26",
+            "machine_id": 3,
+            "product_id": 5,
+            "planned_quantity": 7000,
+            "priority": "medium",
+            "status": "scheduled"
+        },
+        {
+            "id": 3,
+            "date": "2024-01-27",
+            "machine_id": 2,
+            "product_id": 3,
+            "planned_quantity": 10000,
+            "priority": "high",
+            "status": "scheduled"
+        }
+    ],
+    "quality_standards": [
+        {
+            "product_id": 1,
+            "max_defect_rate": 1.0,
+            "quality_parameters": [
+                {
+                    "parameter": "Basis Weight",
+                    "min": 68,
+                    "max": 72,
+                    "unit": "gsm"
+                },
+                {
+                    "parameter": "Brightness",
+                    "min": 92,
+                    "max": 96,
+                    "unit": "%"
+                },
+                {
+                    "parameter": "Opacity",
+                    "min": 94,
+                    "max": 98,
+                    "unit": "%"
+                }
+            ]
+        },
+        {
+            "product_id": 2,
+            "max_defect_rate": 1.2,
+            "quality_parameters": [
+                {
+                    "parameter": "Basis Weight",
+                    "min": 78,
+                    "max": 82,
+                    "unit": "gsm"
+                },
+                {
+                    "parameter": "Brightness",
+                    "min": 90,
+                    "max": 94,
+                    "unit": "%"
+                },
+                {
+                    "parameter": "Opacity",
+                    "min": 96,
+                    "max": 99,
+                    "unit": "%"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,87 @@
+/* Custom Styles for Manufacturing System */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    margin-bottom: 1rem;
+}
+
+.card-header {
+    font-weight: 600;
+}
+
+.table th {
+    border-top: none;
+    font-weight: 600;
+    color: #495057;
+}
+
+.badge {
+    font-size: 0.75em;
+}
+
+/* Custom button styles */
+.btn {
+    border-radius: 0.375rem;
+}
+
+/* Form controls */
+.form-control, .form-select {
+    border-radius: 0.375rem;
+}
+
+/* Navigation */
+.navbar-brand {
+    font-weight: 700;
+}
+
+/* Alert styles */
+.alert {
+    border: none;
+    border-radius: 0.5rem;
+}
+
+/* Chart container */
+canvas {
+    max-width: 100%;
+}
+
+/* Status indicators */
+.status-running { color: #198754; }
+.status-maintenance { color: #ffc107; }
+.status-stopped { color: #dc3545; }
+
+/* OEE progress bars */
+.oee-excellent { background-color: #198754; }
+.oee-good { background-color: #ffc107; }
+.oee-poor { background-color: #dc3545; }
+
+/* Inventory status */
+.stock-low { background-color: #f8d7da !important; }
+.stock-ok { background-color: #d1e7dd !important; }
+
+/* Responsive tables */
+.table-responsive {
+    border-radius: 0.375rem;
+}
+
+/* Custom margins */
+.mb-4 {
+    margin-bottom: 1.5rem !important;
+}
+
+.mt-4 {
+    margin-top: 1.5rem !important;
+}
+
+/* Quick action buttons */
+.btn-outline-primary:hover,
+.btn-outline-info:hover,
+.btn-outline-warning:hover,
+.btn-outline-success:hover {
+    color: #fff;
+}
